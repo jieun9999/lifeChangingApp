@@ -13,6 +13,9 @@ body {
   width: 80vw;
   border-radius: 30px;
   box-shadow: inset 0px 4px 4px #949693;
+  display: flex;
+  flex-direction: row;
+  
 }
 
 

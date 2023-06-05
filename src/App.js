@@ -8,6 +8,7 @@ import Hobby from "../src/pages/Hobby";
 import Settings from "../src/pages/Settings";
 import Logout from "../src/pages/Logout";
 import Menu from "../src/components/Menu";
+import Header from '../src/components/Header';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
     </Routes>
     <div className='background'>
     <Menu/>
+    <Header/>
     </div>
     </div>
   );

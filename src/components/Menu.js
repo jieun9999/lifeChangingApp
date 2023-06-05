@@ -29,22 +29,27 @@ align-items: center;
 margin-bottom: 2vh;
 text-decoration: none;
 text-underline-position:none;
+>img{
+    width: 30px;
+  }
 `;
 const Name = styled.div`
 color:#40513B;
 font-family: 'Merriweather';
 font-weight: 900;
 font-size: 30px;
-margin-bottom: 8vh;
+margin-top: 13vh;
 `;
 
-const MenuContainer = styled.button`
+const MenuContainer = styled.div`
   width: 20vw;
   height: 100vh;
   border: 1px solid #E6E6E6;
   border-radius: 30px 0 0 30px;
   box-shadow: inset 0px 4px 4px #949693;
-
+  display:flex;
+  flex-direction:column;
+  align-items: center;
 `;
 
 const MenuSelector = styled.div`
@@ -52,11 +57,12 @@ const MenuSelector = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 30px;
   color: #A1AAAB;
   font-family: 'Merriweather';
   font-style: normal;
+  margin-top: 10vh;
 `;
 
 const Menu = () => {
