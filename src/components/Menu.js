@@ -39,6 +39,7 @@ font-family: 'Merriweather';
 font-weight: 900;
 font-size: 30px;
 margin-top: 13vh;
+margin-bottom:-3vh;
 `;
 
 const MenuContainer = styled.div`

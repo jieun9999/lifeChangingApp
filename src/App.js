@@ -13,6 +13,10 @@ import Header from '../src/components/Header';
 function App() {
   return (
     <div className="App">
+    <div className='background'>
+    <Menu/>
+    <div className="HeaderMain">
+    <Header/>
     <Routes>
     <Route path ="/" element ={<Overview/>}/>
     <Route path ="/health" element ={<Health/>}/>
@@ -22,9 +26,7 @@ function App() {
     <Route path ="/settings" element ={<Settings/>}/>
     <Route path ="/logout" element ={<Logout/>}/>
     </Routes>
-    <div className='background'>
-    <Menu/>
-    <Header/>
+    </div>
     </div>
     </div>
   );

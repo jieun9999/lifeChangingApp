@@ -35,6 +35,7 @@ flex-direction:row;
 height: 15vh;
 width:60vw;
 justify-content: space-around;
+margin-bottom: 13vh;
 `;
 
 const SearchBox = styled.div`
