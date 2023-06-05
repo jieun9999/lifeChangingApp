@@ -9,11 +9,18 @@ const CardContainer = styled.div`
 `;
 
 const Overview = () =>{
+
+const todoCard = ["To do","In Progress","Completed"]
  return(
  <CardContainer>
- <TodoCard/>
- <TodoCard/>
- <TodoCard/>
+ {
+    todoCard.map((item)=>{
+        return(
+            <TodoCard item={item} key={item}>
+            </TodoCard>
+        )
+    })
+ }
 </CardContainer>
 )
 };

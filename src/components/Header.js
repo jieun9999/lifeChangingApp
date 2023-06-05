@@ -4,6 +4,16 @@ import alarm from '../img/icon/streamline_interface-alert-alarm-bell-1-notificat
 import down from '../img/icon/Group.png';
 import profile from '../img/icon/Ellipse 1.png';
 
+const RealTitle = styled.div`
+
+font-family: 'Merriweather';
+font-style: normal;
+font-weight: 400;
+font-size: 25px;
+color: #40513B;
+margin-bottom: 5vh;
+margin-left: 4vw;
+`;
 const ProfileBox = styled.div`
     display: flex;
     flex-direction: row;
@@ -35,7 +45,7 @@ flex-direction:row;
 height: 15vh;
 width:60vw;
 justify-content: space-around;
-margin-bottom: 13vh;
+margin-bottom: 5vh;
 `;
 
 const SearchBox = styled.div`
@@ -65,6 +75,7 @@ color: #A2A2A2;
 
 const Header = () => {
     return(
+        <>
         <HeadContainer>
         <SearchBox>
         <img src ={search} alt="icon"></img>
@@ -77,6 +88,8 @@ const Header = () => {
         <img className='profile' src={profile} alt="icon"></img>
         </ProfileBox>
         </HeadContainer>
+        <RealTitle>Health</RealTitle>
+        </>
     )
     };
     export default Header;
