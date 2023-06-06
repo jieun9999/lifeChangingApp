@@ -6,12 +6,11 @@ import mockTodo from "../data/mockTodo";
 import { useState } from "react";
 
 const SeveralItemContainer =styled.div`
-
+z-index: 10;
 `;
 const TodoItemContainer = styled.div`
  display:flex;
  flex-direction:column;
- align-items:center;
  width:13vw;
  padding-top: 2vh;
  padding-bottom:2vh;
@@ -20,12 +19,14 @@ const TodoItemContainer = styled.div`
  filter: drop-shadow(0px 4px 4px #BABF9D);
  margin-bottom:2vh;
 
+
  .content{
 font-family: 'Merriweather';
 font-style: normal;
 font-weight: 400;
 font-size: 11px;
 color: #000000;
+padding-left: 2vw;
 }
 `;
 
@@ -57,6 +58,7 @@ margin-right: 1.5vw;
  }
 `;
 
+
 const TodoItem = () =>{
 
    const [todoData, setTodoData]= useState(mockTodo);
@@ -70,9 +72,11 @@ return(
       <TitleContainer>
       <img className ="dot" src={dot} alt="icon"></img>
       <div className="title">{item.title}</div>
-      <img  className="noncheck" src = {noncheck} alt="icon"></img>
+      <img  className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
       </TitleContainer>
+      <div className="contentcontainer">
       <div className="content">{item.content}</div>
+      </div>
       </TodoItemContainer>
       )
     })
