@@ -3,6 +3,10 @@ import TodoItem from "../components/TodoItem";
 import styled from "styled-components";
 import React, {useReducer} from "react";
 import Modal from "../components/Modal";
+import { modalReducer} from "../reducers/modalReducer";
+import { initialState } from "../reducers/modalReducer";
+import { openModal } from "../actions/modalActions";
+import { closeModal } from "../actions/modalActions";
 
 
 const Title = styled.div`
@@ -17,7 +21,7 @@ width:11vw;
 `;
 
 const Card = styled.div`
- width: 15vw;
+ width: 17vw;
  height: 60vh;
  display:flex;
  flex-direction:column;
@@ -26,7 +30,7 @@ const Card = styled.div`
  border-radius: 20px;
 
  .pluscontainer{
-   width:13vw;
+   width:15vw;
    display:flex;
    flex-direction:row;
    align-items:center;
@@ -35,47 +39,32 @@ const Card = styled.div`
    box-shadow: 0px 4px 4px rgba(95, 92, 92, 0.75);
    border-radius: 20px;
    margin-bottom: 4vh;
-   height:4vh;
+   height:5vh;
  }
 `;
 
 
-const initialState = {
-  showModal:false,
-  };
-
-  // 현재 상태인 state와 action 객체를 전달받음
-  // reducer함수에서 action객체를 확인하고 상태를 변경함
-  const reducer = (state, action) =>{
-    switch(action.type){
-    case 'OPEN_MODAL':
-      return {...state, showModal:true};
-      case 'CLOSE_MODAL':
-        return {...state, showModal:false};
-        default:
-          return state;
-    }
-  };
-
 const TodoCard = ({item}) =>{
   // state는 reducer로 관리하고, dispatch는 reducer를 호출시켜 initialState를 업데이트 시키는 매개체가 된다
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(modalReducer, initialState);
 
-  const openModal = () =>{
-   dispatch({type:'OPEN_MODAL'})
+  //dispatch로 actions를 전달해주고, dispatch가 modalReducer를 호출하여 전역 상태관리를 하는구나
+  const handleOpenModal = () =>{
+    dispatch(openModal())
   };
 
-  const closeModal = () =>{
-   dispatch({type:'CLOSE_MODAL'})
+  const handleCloseModal = () =>{
+   dispatch(closeModal())
   };
 
  return (
     <Card>
      <Title>{item}</Title>
-     <div onClick={openModal} className ="pluscontainer">
+     <div onClick={handleOpenModal} className ="pluscontainer">
       <img src={plus} alt='icon'></img>
       </div>
-      {state.showModal ? <Modal onClick={closeModal}/>: null} {/* 컴포넌트에 onClick을 props로 내려준것이니 모달컴포넌트로 가서 직접 이벤트를 작성해야 한다 */}
+      {state.showModal ? <Modal onClick={handleCloseModal}/>: null} 
+      {/* 컴포넌트에 onClick을 props로 내려준것이니 모달컴포넌트로 가서 직접 이벤트를 작성해야 한다 */}
      <TodoItem/>
     </Card>
  )

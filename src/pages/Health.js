@@ -10,7 +10,7 @@ const CardContainer = styled.div`
 
 const Health = () =>{
 
-const todoCard = ["To do","In Progress","Completed"]
+const todoCard = ["To do","Completed"]
  return(
  <CardContainer>
  {

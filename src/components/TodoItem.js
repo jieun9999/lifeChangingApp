@@ -2,16 +2,20 @@ import dot from "../img/icon/gotttt.png";
 import noncheck from "../img/icon/non check.png";
 import check from "../img/icon/check.png";
 import styled from 'styled-components';
-import mockTodo from "../data/mockTodo";
-import { useState } from "react";
+import { todoItem } from "../reducers/todoItemReducer";
+import { checkReducer } from '../reducers/todoItemReducer';
+import { useReducer} from 'react';
+import {checkBox} from "../actions/modalActions";
+
 
 const SeveralItemContainer =styled.div`
 z-index: 10;
 `;
+
 const TodoItemContainer = styled.div`
  display:flex;
  flex-direction:column;
- width:13vw;
+ width:15vw;
  padding-top: 2vh;
  padding-bottom:2vh;
  background: #EDEDED;
@@ -24,7 +28,7 @@ const TodoItemContainer = styled.div`
 font-family: 'Merriweather';
 font-style: normal;
 font-weight: 400;
-font-size: 11px;
+font-size: 14px;
 color: #000000;
 padding-left: 2vw;
 }
@@ -34,7 +38,8 @@ const TitleContainer = styled.div`
  display:flex;
  flex-direction: row;
  justify-content: space-around;
- width: 13vw;
+ width: 15vw;
+ margin-bottom:1vh;
 
  .dot{
     width:15px;
@@ -45,14 +50,14 @@ const TitleContainer = styled.div`
  .noncheck{
     width:20px;
     height:20px;
-    margin-right:5px;
+    padding-right:-1.5vw;
  }
 
  .title{
 font-family: 'Merriweather';
 font-style: normal;
 font-weight: 700;
-font-size: 15px;
+font-size: 16px;
 color: #000000;
 margin-right: 1.5vw;
  }
@@ -61,18 +66,22 @@ margin-right: 1.5vw;
 
 const TodoItem = () =>{
 
-   const [todoData, setTodoData]= useState(mockTodo);
-   
+   const [state, dispatch] = useReducer(checkReducer, todoItem)
+  
+   const handleCheck = (id) =>{
+      dispatch(checkBox(id));
+    };
+
 return(
    <SeveralItemContainer>
    {
-    todoData.map((item)=>{
+    state.map((item)=>{
       return (
       <TodoItemContainer key={item.id}>
       <TitleContainer>
       <img className ="dot" src={dot} alt="icon"></img>
       <div className="title">{item.title}</div>
-      <img  className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
+      <img onClick={ () => {handleCheck(item.id)}} className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
       </TitleContainer>
       <div className="contentcontainer">
       <div className="content">{item.content}</div>
@@ -86,3 +95,7 @@ return(
 };
 
 export default TodoItem;
+
+
+   
+   
