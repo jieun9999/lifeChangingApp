@@ -7,6 +7,8 @@ import { modalReducer} from "../reducers/modalReducer";
 import { initialState } from "../reducers/modalReducer";
 import { openModal } from "../actions/modalActions";
 import { closeModal } from "../actions/modalActions";
+import { updateReducer } from "../reducers/todoItemReducer";
+
 
 
 const Title = styled.div`
@@ -43,10 +45,19 @@ const Card = styled.div`
  }
 `;
 
+export const initialContentState = {
+  id:null,
+  isDone:false,
+  title: '',
+  startDate: '',
+  endDate: '',
+  content: '',
+};
 
 const TodoCard = ({item}) =>{
   // state는 reducer로 관리하고, dispatch는 reducer를 호출시켜 initialState를 업데이트 시키는 매개체가 된다
   const [state, dispatch] = useReducer(modalReducer, initialState);
+  const [contentState, contentDispatch] = useReducer(updateReducer, initialContentState)
 
   //dispatch로 actions를 전달해주고, dispatch가 modalReducer를 호출하여 전역 상태관리를 하는구나
   const handleOpenModal = () =>{
@@ -57,15 +68,16 @@ const TodoCard = ({item}) =>{
    dispatch(closeModal())
   };
 
+
  return (
     <Card>
      <Title>{item}</Title>
      <div onClick={handleOpenModal} className ="pluscontainer">
       <img src={plus} alt='icon'></img>
       </div>
-      {state.showModal ? <Modal onClick={handleCloseModal}/>: null} 
+      {state.showModal ? <Modal contentState={contentState} contentDispatch={contentDispatch} onClick={handleCloseModal}/>: null} 
       {/* 컴포넌트에 onClick을 props로 내려준것이니 모달컴포넌트로 가서 직접 이벤트를 작성해야 한다 */}
-     <TodoItem/>
+     <TodoItem contentState={contentState} contentDispatch={contentDispatch}/>
     </Card>
  )
 };

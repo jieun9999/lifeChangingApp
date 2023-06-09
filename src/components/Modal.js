@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import dot from "../img/icon/realdot.png";
 import edit from "../img/icon/tabler_edit.png";
-import { useReducer } from 'react';
-import { updateReducer } from "../reducers/todoItemReducer"
+import { v4 as uuidv4 } from 'uuid';
 
 const ModalView = styled.div`
  width: 25vw;
@@ -106,18 +105,8 @@ const ModalBackGround = styled.div`
   z-index:50;
 `;
 
-export const initialState = {
-  id:'',
-  isDone:false,
-  title: '',
-  startDate: '',
-  endDate: '',
-  content: '',
-};
 
-const Modal = ({onClick}) =>{
-
-  const [state, dispatch] = useReducer(updateReducer, initialState)
+const Modal = ({onClick, contentState, contentDispatch}) =>{
 
   const handleModalClick = (e) => {
     e.stopPropagation(); // 이벤트 버블링 막기
@@ -126,39 +115,30 @@ const Modal = ({onClick}) =>{
   //사용자가 입력한 값을 추적하는 함수
   const handleInputChange = (e) =>{
    const {name, value} = e.target;
-   dispatch({type: `UPDATE_${name.toUpperCase()}`, payload: value})
+   contentDispatch({type: `UPDATE_${name.toUpperCase()}`, payload: value})
   };
 
-  //클릭으로 적은 모든 내용을 한번에 전달
-  const addItem = () =>{
-  dispatch({type:'ADD_ITEM'});
-  };
-  //payload를 줄필요가 없음
+  const handleAddItem = () =>{
+    contentDispatch({type:'ADD_ITEM', payload: `${uuidv4()}`});
+    };
 
-  console.log(state)
-  /**
-   * 현재의 updateReducer는 모달 창에 사용되는 값들만 인식하고 처리하기 때문에 다른 페이지로 상태를 전달하는데에는 적합하지 않습니다. 따라서 새로운 리듀서를 만들어서 다른 페이지에서 사용하는 상태를 처리하는 것이 좋습니다.
-   */
-  /**
-   * content: "1ㅈㅁㅇㅁㄴ"endDate: "2024-01-01"id: 2 isDone: false startDate: "2022-01-01" title: "안뇽"
-   */
-
+  
 return(
     <ModalBackGround onClick={onClick}>
     <ModalView onClick={handleModalClick} >
     <div className = "titleContainer">
     <img className="dot" src = {dot} alt="icon"></img> 
-    <input value ={state.title} name = "title" className="title" placeholder="메모 제목" onChange={handleInputChange}></input>
-    <img onClick={addItem} className="edit" src={edit} alt="icon"></img>
+    <input value ={contentState.title} name = "title" className="title" placeholder="메모 제목" onChange={handleInputChange}></input>
+    <img onClick={handleAddItem} className="edit" src={edit} alt="icon"></img>
     </div>
     <div className="date">
     <div className='일자'>일자</div>
-    <input value ={state.startDate} name ="startDate" className ="start" placeholder="시작일" onChange={handleInputChange}></input>
+    <input value ={contentState.startDate} name ="startDate" className ="start" placeholder="시작일" onChange={handleInputChange}></input>
     <div>~</div>
-    <input value ={state.endDate} name= "endDate" className ="end" placeholder="종료일" onChange={handleInputChange}></input>
+    <input value ={contentState.endDate} name= "endDate" className ="end" placeholder="종료일" onChange={handleInputChange}></input>
     </div>
     <div className='contentContainer'>
-    <textarea value ={state.content} name ="content" className ="content" placeholder="메모" onChange={handleInputChange}>
+    <textarea value ={contentState.content} name ="content" className ="content" placeholder="메모" onChange={handleInputChange}>
     </textarea>
     </div>
     </ModalView>

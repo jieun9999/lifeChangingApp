@@ -1,4 +1,5 @@
-import { initialState } from "../components/Modal";
+
+import { initialContentState } from "../components/TodoCard";
 
 export const todoItem = [
 
@@ -19,10 +20,33 @@ export const todoItem = [
     }
 ];
 
-//addedState를 여기로 데려와야 함
+
+
+// 모달에서 글쓰기 버튼 누르면 저장되는 리듀서
+// 여러번 CASE가 호출될 경우, state가 누적된다
+export const updateReducer = (state=initialContentState, action)=>{
+  
+ switch(action.type){
+  case 'UPDATE_TITLE': 
+    return{...state, title: action.payload};
+  case 'UPDATE_STARTDATE':
+    return{...state, startDate: action.payload};
+  case 'UPDATE_ENDDATE':
+    return{...state, endDate:action.payload};
+  case 'UPDATE_CONTENT':
+    return {...state, content: action.payload};
+  case 'ADD_ITEM':
+    return  {...state, id:action.payload};
+    //여기서 todoItem을 바로 쓸 수 없다. state나 action관련된 변수만 넣어야 한다
+   // 배열은 가능하지만, 객체는 전개연산자(...)를 쓸 수 없다
+    default:
+    return state;
+ }
+};
+
 //클릭해서 받은 item.id가 같은 객체에 대해서만  isDone 속성을 바꿔주어야 하거든
 
-export const checkReducer = (state=initialState, action) =>{
+/*export const checkReducer = (state=initialState, action) =>{
     const id = action.payload;
   
    switch(action.type){
@@ -39,26 +63,4 @@ export const checkReducer = (state=initialState, action) =>{
         return state;
    }
   };
-
-
-// 모달에서 글쓰기 버튼 누르면 저장되는 리듀서
-// 여러번 CASE가 호출될 경우, state가 누적된다
-export const updateReducer = (state=initialState, action)=>{
-  
- switch(action.type){
-  case 'UPDATE_TITLE': 
-    return{...state, title: action.payload};
-  case 'UPDATE_STARTDATE':
-    return{...state, startDate: action.payload};
-  case 'UPDATE_ENDDATE':
-    return{...state, endDate:action.payload};
-  case 'UPDATE_CONTENT':
-    return {...state, content: action.payload};
-  case 'ADD_ITEM':
-    return  {...state, id: Number(state.id)+1}
-    //여기서 todoItem을 바로 쓸 수 없다. state나 action관련된 변수만 넣어야 한다
-   // 배열은 가능하지만, 객체는 전개연산자(...)를 쓸 수 없다
-    default:
-    return state;
- }
-};
+  */

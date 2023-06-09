@@ -2,10 +2,6 @@ import dot from "../img/icon/gotttt.png";
 import noncheck from "../img/icon/non check.png";
 import check from "../img/icon/check.png";
 import styled from 'styled-components';
-import { todoItem } from "../reducers/todoItemReducer";
-import { checkReducer } from '../reducers/todoItemReducer';
-import { useReducer} from 'react';
-import {checkBox} from "../actions/modalActions";
 
 
 const SeveralItemContainer =styled.div`
@@ -64,32 +60,32 @@ margin-right: 1.5vw;
 `;
 
 
-const TodoItem = () =>{
+const TodoItem = ({contentState, contentDispatch}) =>{
 
-   const [state, dispatch] = useReducer(checkReducer, todoItem)
-  
-   const handleCheck = (id) =>{
-      dispatch(checkBox(id));
-    };
+
+//useEffect를 사용하여
+//contentState.id가 존재할때
+//재렌더링이 되어야 함
+//contentState의 형태가 어떻게 되는가? 배열인가 객체인가
+//그런데, map 함수는 배열에 써야 한다
+// contentState는 한개의 객체만 들어올 수 있다
+// 이외에 여러객체를 누적시킬 수 있는 공간이 필요하다
 
 return(
    <SeveralItemContainer>
-   {
-    state.map((item)=>{
-      return (
-      <TodoItemContainer key={item.id}>
+      {
+      contentState.id ? <TodoItemContainer key={contentState.id}>
       <TitleContainer>
       <img className ="dot" src={dot} alt="icon"></img>
-      <div className="title">{item.title}</div>
-      <img onClick={ () => {handleCheck(item.id)}} className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
+      <div className="title">{contentState.title}</div>
+      <img className="noncheck" src = {contentState.isDone ? check: noncheck} alt="icon"></img>
       </TitleContainer>
       <div className="contentcontainer">
-      <div className="content">{item.content}</div>
+      <div className="content">{contentState.content}</div>
       </div>
-      </TodoItemContainer>
-      )
-    })
-   }
+      </TodoItemContainer> :
+      null
+      }
     </SeveralItemContainer>
 )
 };
