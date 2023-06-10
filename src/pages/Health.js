@@ -1,5 +1,6 @@
-import TodoCard from "../components/TodoCard";
 import styled from 'styled-components';
+import CompletedCard from "../components/TodoCard/CompletedCard";
+import TodoCard from "../components/TodoCard/TodoCard";
 
 const CardContainer = styled.div`
  display:flex;
@@ -10,17 +11,10 @@ const CardContainer = styled.div`
 
 const Health = () =>{
 
-const todoCard = ["To do","Completed"]
  return(
  <CardContainer>
- {
-    todoCard.map((item)=>{
-        return(
-            <TodoCard item={item} key={item}>
-            </TodoCard>
-        )
-    })
- }
+ <TodoCard/>
+ <CompletedCard/>
 </CardContainer>
 )
 };

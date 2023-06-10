@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-import dot from "../img/icon/realdot.png";
-import edit from "../img/icon/tabler_edit.png";
+import dot from "../../img/icon/realdot.png";
+import edit from "../../img/icon/tabler_edit.png";
 import { v4 as uuidv4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import {update_title, update_startdate, update_enddate,update_content, add_item} from "../TodoItem/modalTodoItemSlice";
+import {modalIsClose} from "./ModalOpenSlice";
 
 const ModalView = styled.div`
  width: 25vw;
@@ -106,39 +109,32 @@ const ModalBackGround = styled.div`
 `;
 
 
-const Modal = ({onClick, contentState, contentDispatch}) =>{
+const TodoModal = ({todoModalContent}) =>{
 
+  const dispatch = useDispatch();
   const handleModalClick = (e) => {
     e.stopPropagation(); // 이벤트 버블링 막기
   };
 
-  //사용자가 입력한 값을 추적하는 함수
-  const handleInputChange = (e) =>{
-   const {name, value} = e.target;
-   contentDispatch({type: `UPDATE_${name.toUpperCase()}`, payload: value})
-  };
+  console.log(todoModalContent)
 
-  const handleAddItem = () =>{
-    contentDispatch({type:'ADD_ITEM', payload: `${uuidv4()}`});
-    };
 
-  
 return(
-    <ModalBackGround onClick={onClick}>
+    <ModalBackGround onClick={()=>dispatch(modalIsClose())}>
     <ModalView onClick={handleModalClick} >
     <div className = "titleContainer">
     <img className="dot" src = {dot} alt="icon"></img> 
-    <input value ={contentState.title} name = "title" className="title" placeholder="메모 제목" onChange={handleInputChange}></input>
-    <img onClick={handleAddItem} className="edit" src={edit} alt="icon"></img>
+    <input value ={todoModalContent.title} name = "title" className="title" placeholder="메모 제목" onChange={(e)=>dispatch(update_title(e.target.value))}></input>
+    <img onClick={()=>dispatch(add_item(uuidv4()))} className="edit" src={edit} alt="icon"></img>
     </div>
     <div className="date">
     <div className='일자'>일자</div>
-    <input value ={contentState.startDate} name ="startDate" className ="start" placeholder="시작일" onChange={handleInputChange}></input>
+    <input value ={todoModalContent.startDate} name ="startDate" className ="start" placeholder="시작일" onChange={(e)=>dispatch(update_startdate(e.target.value))}></input>
     <div>~</div>
-    <input value ={contentState.endDate} name= "endDate" className ="end" placeholder="종료일" onChange={handleInputChange}></input>
+    <input value ={todoModalContent.endDate} name= "endDate" className ="end" placeholder="종료일" onChange={(e)=>dispatch(update_enddate(e.target.value))}></input>
     </div>
     <div className='contentContainer'>
-    <textarea value ={contentState.content} name ="content" className ="content" placeholder="메모" onChange={handleInputChange}>
+    <textarea value ={todoModalContent.content} name ="content" className ="content" placeholder="메모" onChange={(e)=>dispatch(update_content(e.target.value))}>
     </textarea>
     </div>
     </ModalView>
@@ -146,4 +142,4 @@ return(
 )
 };
 
-export default Modal;
+export default TodoModal;

@@ -1,7 +1,8 @@
-import dot from "../img/icon/gotttt.png";
-import noncheck from "../img/icon/non check.png";
-import check from "../img/icon/check.png";
+import dot from "../../img/icon/gotttt.png";
+import noncheck from "../../img/icon/non check.png";
+import check from "../../img/icon/check.png";
 import styled from 'styled-components';
+import { useDispatch } from "react-redux";
 
 
 const SeveralItemContainer =styled.div`
@@ -60,8 +61,8 @@ margin-right: 1.5vw;
 `;
 
 
-const TodoItem = ({contentState, contentDispatch}) =>{
-
+const CompletedItem = ({completedModalContent}) =>{
+const dispatch = useDispatch();
 
 //useEffect를 사용하여
 //contentState.id가 존재할때
@@ -74,14 +75,14 @@ const TodoItem = ({contentState, contentDispatch}) =>{
 return(
    <SeveralItemContainer>
       {
-      contentState.id ? <TodoItemContainer key={contentState.id}>
+      completedModalContent.id ? <TodoItemContainer key={completedModalContent.id}>
       <TitleContainer>
       <img className ="dot" src={dot} alt="icon"></img>
-      <div className="title">{contentState.title}</div>
-      <img className="noncheck" src = {contentState.isDone ? check: noncheck} alt="icon"></img>
+      <div className="title">{completedModalContent.title}</div>
+      <img className="noncheck" src = {completedModalContent.isDone ? check: noncheck} alt="icon"></img>
       </TitleContainer>
       <div className="contentcontainer">
-      <div className="content">{contentState.content}</div>
+      <div className="content">{completedModalContent.content}</div>
       </div>
       </TodoItemContainer> :
       null
@@ -90,7 +91,7 @@ return(
 )
 };
 
-export default TodoItem;
+export default CompletedItem;
 
 
    

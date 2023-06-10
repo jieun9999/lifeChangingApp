@@ -10,7 +10,7 @@ import Logout from "../src/pages/Logout";
 import Menu from "../src/components/Menu";
 import Header from '../src/components/Header';
 import {Provider} from "react-redux";
-import store from "./store/store";
+import {store} from "./store/store";
 
 function App() {
   return (
