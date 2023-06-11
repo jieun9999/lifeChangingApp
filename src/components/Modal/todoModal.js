@@ -4,8 +4,9 @@ import edit from "../../img/icon/tabler_edit.png";
 import { useDispatch } from 'react-redux';
 import {update_title, update_startdate, update_enddate,update_content, add_item} from "../TodoItem/modalTodoItemSlice";
 import {modalIsClose} from "./ModalOpenSlice";
-import upload from "../../img/icon/Vector.png";
+import upload from "../../img/icon/upload.png";
 import {update_frame} from "../TodoItem/modalTodoItemSlice";
+
 
 const ModalView = styled.div`
  width: 25vw;
@@ -90,13 +91,15 @@ const ModalView = styled.div`
     margin-top:3vh;
    }
    .edit{
-    margin-right:1vw;
+    width: 33px;
+    height:33px;
+    margin-right:0.5vw;
     margin-bottom: 2vh;
    }
    .upload{
     width: 33px;
     height:33px;
-    margin-right:1vw;
+    margin-right:0.5vw;
     margin-bottom: 2vh;
    }
  }
@@ -133,7 +136,7 @@ return(
     <img className="dot" src = {dot} alt="icon"></img> 
     <input value ={todoModalContent.title} name = "title" className="title" placeholder="메모 제목" onChange={(e)=>dispatch(update_title(e.target.value))}></input>
     <img onClick={()=>dispatch(update_frame())} className="edit" src={edit} alt="icon"></img>
-    <img onClick={()=>dispatch(add_item(true))}className='upload' src={upload} alt="icon"></img>
+    <img onClick={()=>dispatch(add_item(true))} className='upload' src={upload} alt="icon"></img>
     </div>
     <div className="date">
     <div className='일자'>일자</div>

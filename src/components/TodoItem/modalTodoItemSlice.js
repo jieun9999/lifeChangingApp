@@ -42,12 +42,18 @@ export const modalTodoItemSlice = createSlice({
     add_item: (state, action) =>{
         state[idNumber].upload = action.payload
         idNumber += 1;
+    },
+    delete_item: (state, action)=>{
+    const itemId = action.payload;
+    const index = state.findIndex((item)=> item.id === itemId)
+    if(index !== -1){
+        state.splice(index,1);
     }
- }
+    }}
 });
 
 //modalTodoItemSlice.action
-export const {update_frame, update_title, update_startdate, update_enddate, update_content, add_item} = modalTodoItemSlice.actions
+export const {delete_item, update_frame, update_title, update_startdate, update_enddate, update_content, add_item} = modalTodoItemSlice.actions
 //reducer 
 export default modalTodoItemSlice.reducer;
 

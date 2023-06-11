@@ -2,7 +2,16 @@ import dot from "../../img/icon/gotttt.png";
 import noncheck from "../../img/icon/non check.png";
 import check from "../../img/icon/check.png";
 import styled from 'styled-components';
+import del from "../../img/icon/delete.png";
+import { useDispatch } from "react-redux";
+import {delete_item } from "../../components/TodoItem/modalTodoItemSlice";
 
+const ContentContainer = styled.div`
+display:flex;
+flex-direction:row;
+align-items:center;
+justify-content:space-between
+`;
 
 const SeveralItemContainer =styled.div`
 z-index: 10;
@@ -28,6 +37,12 @@ font-size: 14px;
 color: #000000;
 padding-left: 2vw;
 }
+
+.delete{
+    width: 20px;
+    height:20px;
+    margin-right:1.5vw;
+   }
 `;
 
 const TitleContainer = styled.div`
@@ -69,6 +84,7 @@ const TodoItem = ({todoModalContent}) =>{
 //그런데, map 함수는 배열에 써야 한다
 // contentState는 한개의 객체만 들어올 수 있다
 // 이외에 여러객체를 누적시킬 수 있는 공간이 필요하다
+const dispatch = useDispatch();
 
 return(
    <SeveralItemContainer>
@@ -81,9 +97,10 @@ return(
       <div className="title">{item.title}</div>
       <img className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
       </TitleContainer>
-      <div className="contentcontainer">
+      <ContentContainer>
       <div className="content">{item.content}</div>
-      </div>
+      <img onClick={()=>dispatch(delete_item(item.id))} className='delete' src={del} alt="icon"></img>
+      </ContentContainer>
       </TodoItemContainer> : null
       ) 
       }
