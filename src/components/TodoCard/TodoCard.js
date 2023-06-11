@@ -2,9 +2,9 @@ import plus from "../../img/icon/tabler_plus.png"
 import TodoItem from "../TodoItem/TodoItem";
 import styled from "styled-components";
 import React from "react";
-import {modalIsOpen, modalIsClose} from "../Modal/ModalOpenSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import TodoModal from "../Modal/todoModal";
+import { useState } from "react";
 
 
 
@@ -45,19 +45,18 @@ const Card = styled.div`
 
 const TodoCard = () =>{
   // state는 reducer로 관리하고, dispatch는 reducer를 호출시켜 initialState를 업데이트 시키는 매개체가 된다
-  const modalOpen = useSelector((state)=> state.modalOpen)
-  const todoModalContent = useSelector((state)=> state.todoModalContent)
-  const dispatch = useDispatch()
-
   
+  const [showTodoModal, setShowTodoModal] = useState(false);
+  const todoModalContent = useSelector((state)=> state.todoModalContent)
+  console.log(todoModalContent)
   
  return (
     <Card >
      <Title>To do</Title>
-     <div onClick={()=>dispatch(modalIsOpen())} className ="pluscontainer">
+     <div onClick={()=>setShowTodoModal(true)} className ="pluscontainer">
       <img src={plus} alt='icon'></img>
       </div>
-      { modalOpen.showModal ? <TodoModal todoModalContent={todoModalContent} onClick={()=>modalIsClose()}/>: null} 
+      { showTodoModal ? <TodoModal todoModalContent={todoModalContent} closeModal={()=>setShowTodoModal(false)}/>: null} 
       {/* 컴포넌트에 onClick을 props로 내려준것이니 모달컴포넌트로 가서 직접 이벤트를 작성해야 한다 */}
       <TodoItem todoModalContent={todoModalContent}/>
     </Card>

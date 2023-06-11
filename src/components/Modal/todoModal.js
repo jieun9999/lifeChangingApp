@@ -119,18 +119,17 @@ const ModalBackGround = styled.div`
 `;
 
 
-const TodoModal = ({todoModalContent}) =>{
+const TodoModal = ({todoModalContent, closeModal}) =>{
 
   const dispatch = useDispatch();
   const handleModalClick = (e) => {
     e.stopPropagation(); // 이벤트 버블링 막기
   };
 
-  console.log(todoModalContent)
 
 
 return(
-    <ModalBackGround onClick={()=>dispatch(modalIsClose())}>
+    <ModalBackGround onClick={closeModal}>
     <ModalView onClick={handleModalClick} >
     <div className = "titleContainer">
     <img className="dot" src = {dot} alt="icon"></img> 
