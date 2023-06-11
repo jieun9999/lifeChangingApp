@@ -73,17 +73,19 @@ const TodoItem = ({todoModalContent}) =>{
 return(
    <SeveralItemContainer>
       {
-      todoModalContent.id ? <TodoItemContainer key={todoModalContent.id}>
+      todoModalContent.map((item)=> 
+      item.upload ?
+      <TodoItemContainer key={item.id}>
       <TitleContainer>
       <img className ="dot" src={dot} alt="icon"></img>
-      <div className="title">{todoModalContent.title}</div>
-      <img className="noncheck" src = {todoModalContent.isDone ? check: noncheck} alt="icon"></img>
+      <div className="title">{item.title}</div>
+      <img className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
       </TitleContainer>
       <div className="contentcontainer">
-      <div className="content">{todoModalContent.content}</div>
+      <div className="content">{item.content}</div>
       </div>
-      </TodoItemContainer> :
-      null
+      </TodoItemContainer> : null
+      ) 
       }
     </SeveralItemContainer>
 )

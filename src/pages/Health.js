@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import CompletedCard from "../components/TodoCard/CompletedCard";
 import TodoCard from "../components/TodoCard/TodoCard";
 
 const CardContainer = styled.div`
@@ -14,7 +13,6 @@ const Health = () =>{
  return(
  <CardContainer>
  <TodoCard/>
- <CompletedCard/>
 </CardContainer>
 )
 };

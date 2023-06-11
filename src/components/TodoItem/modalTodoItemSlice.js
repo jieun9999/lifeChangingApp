@@ -1,36 +1,53 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const modalTodoItemSlice = createSlice({
- name: "modalTodoItem",
- initialState:{
+/*
+ * {
   id: null,
   isDone:false,
   title: '',
   startDate: '',
   endDate: '',
   content: '',
- },
+ }
+ */
+ let idNumber = 0;
+        
+export const modalTodoItemSlice = createSlice({
+ name: "modalTodoItem",
+ initialState:[],
  reducers:{
+    update_frame: (state, action)=>{
+        state.push({
+            id: idNumber,
+            isDone:false,
+            title: '',
+            startDate: '',
+            endDate: '',
+            content: '',
+            upload: false 
+    })
+    },
     update_title: (state, action) =>{
-        state.title = action.payload
+        state[idNumber].title = action.payload
     },
     update_startdate: (state, action) =>{
-        state.startDate = action.payload
+        state[idNumber].startDate = action.payload
     },
     update_enddate: (state, action) =>{
-       state.endDate = action.payload
+        state[idNumber].endDate = action.payload
     },
     update_content: (state, action)=>{
-        state.content = action.payload
+        state[idNumber].content = action.payload
     },
     add_item: (state, action) =>{
-        state.id = action.payload
+        state[idNumber].upload = action.payload
+        idNumber += 1;
     }
  }
 });
 
 //modalTodoItemSlice.action
-export const {update_title, update_startdate, update_enddate, update_content, add_item} = modalTodoItemSlice.actions
+export const {update_frame, update_title, update_startdate, update_enddate, update_content, add_item} = modalTodoItemSlice.actions
 //reducer 
 export default modalTodoItemSlice.reducer;
 
