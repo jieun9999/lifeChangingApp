@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 /*
  * {
   id: null,
@@ -10,12 +9,11 @@ import { createSlice } from "@reduxjs/toolkit";
   content: '',
  }
  */
- 
- export const modalTodoItemSlice = createSlice({
-  name: "modalTodoItem",
+ export const SliceTodoItem = createSlice({
+  name: "SliceTodoItem",
   initialState:[],
   reducers:{
-     update_frame: (state, action)=>{
+    R_update_frame: (state, action)=>{
         const idNumber = state.length -1;
          const newItem ={
                  id: idNumber +1,
@@ -27,44 +25,43 @@ import { createSlice } from "@reduxjs/toolkit";
                  upload: false};
          state.push(newItem)
      },
-     update_title: (state, action) =>{
+     R_update_title: (state, action) =>{
         const idNumber = state.length -1;
          state[idNumber].title = action.payload
      },
-     update_startdate: (state, action) =>{
+     R_update_startdate: (state, action) =>{
         const idNumber = state.length -1;
          state[idNumber].startDate = action.payload
      },
-     update_enddate: (state, action) =>{
+     R_update_enddate: (state, action) =>{
         const idNumber = state.length -1;
          state[idNumber].endDate = action.payload
      },
-     update_content: (state, action)=>{
+     R_update_content: (state, action)=>{
         const idNumber = state.length -1;
          state[idNumber].content = action.payload
      },
-     add_item: (state, action) =>{
+     R_add_item: (state, action) =>{
         const idNumber = state.length -1;
          state[idNumber].upload = true 
      },
-     delete_item: (state, action)=>{
+     R_delete_item: (state, action)=>{
      const itemId = action.payload;
      const index = state.findIndex((item)=> item.id === itemId)
      if(index !== -1){
          state.splice(index,1);
      }
      },
-    check_item:(state, action)=>{
+     R_check_item:(state, action)=>{
     const idNumber = state.length -1;
-     state[idNumber].upload = !state[idNumber].upload;
+    state[idNumber].isDone = !state[idNumber].isDone;
     }}
  });
 
 //modalTodoItemSlice.action
-export const {check_item, delete_item, update_frame, update_title, update_startdate, update_enddate, update_content, add_item} = modalTodoItemSlice.actions
-
+export const {R_check_item,R_delete_item, R_update_frame, R_update_title, R_update_startdate, R_update_enddate, R_update_content, R_add_item} = SliceTodoItem.actions
 
 //reducer 
-export default modalTodoItemSlice.reducer;
+export default SliceTodoItem.reducer;
 
 

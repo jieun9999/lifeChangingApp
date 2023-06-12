@@ -11,6 +11,7 @@ import Menu from "../src/components/Menu";
 import Header from '../src/components/Header';
 import {Provider} from "react-redux";
 import {store} from "./store/store";
+import Calendar from './pages/Calendar';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
     <Route path ="/money" element ={<Money/>}/>
     <Route path ="/relationship" element ={<Realtionship/>}/>
     <Route path ="/hobby" element ={<Hobby/>}/>
+    <Route path ="/calendar" element ={<Calendar/>}/>
     <Route path ="/settings" element ={<Settings/>}/>
     <Route path ="/logout" element ={<Logout/>}/>
     </Routes>

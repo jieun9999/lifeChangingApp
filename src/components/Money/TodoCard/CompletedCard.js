@@ -1,9 +1,9 @@
 import plus from "../../../img/icon/tabler_plus.png"
-import CompletedItem from "../TodoItem/CompletedItem";
+import CompletedItem from "../../Money/TodoItem/CompletedItem";
 import styled from "styled-components";
 import React from "react";
 import {useSelector } from "react-redux";
-import CompletedModal from "../Modal/completedModal";
+import CompletedModal from "../../Money/Modal/CompletedModal";
 import { useState } from "react";
 
 
@@ -44,8 +44,9 @@ const Card = styled.div`
 const CompletedCard = ()=>{
 
     const [showCompletedModal, setShowCompletedModal] = useState(false);
-    const completedModalContent = useSelector((state)=> state.healthCompletedContent.healthCompletedContent)
+    const completedModalContent = useSelector((state)=> state.moneyCompletedContent.moneyCompletedContent) // store에 맞게 수정
     console.log(completedModalContent)
+    
     return (
         <Card >
         <Title>Completed</Title>

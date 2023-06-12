@@ -106,7 +106,7 @@ return(
     <StyledLink to ="/hobby">
     <Item onClick={() => colorChange(4)} style={{ color: color[4] }}>
         <Img src={hobby} alt="icon"/>
-        <div>hobby</div>
+        <div>Hobby</div>
     </Item>
     </StyledLink>
     <StyledLink to="/calendar">
