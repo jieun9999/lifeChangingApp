@@ -1,4 +1,4 @@
-import plus from "../../img/icon/tabler_plus.png"
+import plus from "../../../img/icon/tabler_plus.png"
 import CompletedItem from "../TodoItem/CompletedItem";
 import styled from "styled-components";
 import React from "react";
@@ -44,8 +44,8 @@ const Card = styled.div`
 const CompletedCard = ()=>{
 
     const [showCompletedModal, setShowCompletedModal] = useState(false);
-    const completedModalContent = useSelector((state)=> state.completedModalContent)
-  
+    const completedModalContent = useSelector((state)=> state.completedModalContent.completedModalContent)
+    console.log(completedModalContent)
     return (
         <Card >
         <Title>Completed</Title>

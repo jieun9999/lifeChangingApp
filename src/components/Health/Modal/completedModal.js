@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import dot from "../../img/icon/realdot.png";
-import edit from "../../img/icon/tabler_edit.png";
+import dot from "../../../img/icon/realdot.png";
+import edit from "../../../img/icon/tabler_edit.png";
 import { useDispatch } from 'react-redux';
-import {update_Completed_Frame, update_Completed_Title, update_Completed_StartDate, update_Completed_EndDate, update_Completed_Content, add_Completed_Item} from "../../components/TodoItem/modalCompletedItemSlice";
-import {modalIsClose} from "./ModalOpenSlice";
-import upload from "../../img/icon/upload.png"
+import {update_Completed_Frame, update_Completed_Title, update_Completed_StartDate, update_Completed_EndDate, update_Completed_Content, add_Completed_Item} from "../../Health/TodoItem/modalCompletedItemSlice";
+import upload from "../../../img/icon/upload.png"
 
 
 const ModalView = styled.div`
@@ -124,7 +123,7 @@ const CompletedModal = ({completedModalContent, closeModal}) =>{
     const handleModalClick = (e) => {
       e.stopPropagation(); // 이벤트 버블링 막기
     };
-   console.log(completedModalContent)
+   //console.log(completedModalContent)
 
     return(
         <ModalBackGround onClick={closeModal}>

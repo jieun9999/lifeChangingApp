@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import TodoCard from "../components/TodoCard/TodoCard";
-import CompletedCard from '../components/TodoCard/CompletedCard';
+import TodoCard from "../components/Health/TodoCard/TodoCard";
+import CompletedCard from '../components/Health//TodoCard/CompletedCard';
 
 
 const CardContainer = styled.div`

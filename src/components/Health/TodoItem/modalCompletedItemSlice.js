@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let idNumber = 0;
+// reducer는 순수 함수이기 때문에 외부에서 변수선언을 하는 것은 좋지 않다
+
 
 export const modalCompletedSlice = createSlice({
     name:"modalTodoItem",
     initialState:[],
     reducers:{
         update_Completed_Frame:(state, action) =>{
+            const idNumber = state.length -1;
             state.push({
-                id: idNumber,
+                id: idNumber + 1 ,
                 isDone:false,
                 title: '',
                 startDate: '',
@@ -18,20 +20,24 @@ export const modalCompletedSlice = createSlice({
         })
         },
         update_Completed_Title:(state, action) =>{
+            const idNumber = state.length -1;
             state[idNumber].title = action.payload
         },
         update_Completed_StartDate: (state, action) =>{
+            const idNumber = state.length -1;
             state[idNumber].startDate = action.payload
         },
         update_Completed_EndDate: (state, action) =>{
+            const idNumber = state.length -1;
             state[idNumber].endDate = action.payload
         },
         update_Completed_Content: (state, action)=>{
+            const idNumber = state.length -1;
             state[idNumber].content = action.payload
         },
         add_Completed_Item: (state, action) =>{
+            const idNumber = state.length -1;
             state[idNumber].upload = action.payload
-            idNumber += 1;
         },
         delete_Completed_Item: (state, action)=>{
         const itemId = action.payload;

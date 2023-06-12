@@ -1,4 +1,4 @@
-import plus from "../../img/icon/tabler_plus.png"
+import plus from "../../../img/icon/tabler_plus.png"
 import TodoItem from "../TodoItem/TodoItem";
 import styled from "styled-components";
 import React from "react";
@@ -47,8 +47,10 @@ const TodoCard = () =>{
   // state는 reducer로 관리하고, dispatch는 reducer를 호출시켜 initialState를 업데이트 시키는 매개체가 된다
   
   const [showTodoModal, setShowTodoModal] = useState(false);
-  const todoModalContent = useSelector((state)=> state.todoModalContent)
-  console.log(todoModalContent)
+  const todoModalContent = useSelector((state)=> state.todoModalContent.todoModalContent)
+  
+  //console.log(todoModalContent)
+
   
  return (
     <Card >
