@@ -11,7 +11,7 @@ export const modalCompletedSlice = createSlice({
             const idNumber = state.length -1;
             state.push({
                 id: idNumber + 1 ,
-                isDone:false,
+                isDone:true,
                 title: '',
                 startDate: '',
                 endDate: '',
@@ -44,9 +44,12 @@ export const modalCompletedSlice = createSlice({
         const index = state.findIndex((item)=> item.id === itemId)
         if(index !== -1){
             state.splice(index,1);
-        }
-    }}
+        }},
+        check_Completed_Item: (state, action)=>{
+        const idNumber = state.length -1;
+        state[idNumber].isDone = !state[idNumber].isDone;
+        }}
 })
 
-export const {update_Completed_Frame, update_Completed_Title, update_Completed_StartDate, update_Completed_EndDate, update_Completed_Content, add_Completed_Item, delete_Completed_Item} = modalCompletedSlice.actions;
+export const {check_Completed_Item, update_Completed_Frame, update_Completed_Title, update_Completed_StartDate, update_Completed_EndDate, update_Completed_Content, add_Completed_Item, delete_Completed_Item} = modalCompletedSlice.actions;
 export default modalCompletedSlice.reducer;

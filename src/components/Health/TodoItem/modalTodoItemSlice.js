@@ -48,9 +48,7 @@ import { createSlice } from "@reduxjs/toolkit";
      },
      add_item: (state, action) =>{
         const idNumber = state.length -1;
-         state[idNumber].upload = true
-         
-         
+         state[idNumber].upload = true 
      },
      delete_item: (state, action)=>{
      const itemId = action.payload;
@@ -58,11 +56,15 @@ import { createSlice } from "@reduxjs/toolkit";
      if(index !== -1){
          state.splice(index,1);
      }
-     }}
+     },
+    check_item:(state, action)=>{
+    const idNumber = state.length -1;
+    state[idNumber].isDone = !state[idNumber].isDone;
+    }}
  });
 
 //modalTodoItemSlice.action
-export const {delete_item, update_frame, update_title, update_startdate, update_enddate, update_content, add_item} = modalTodoItemSlice.actions
+export const {check_item,delete_item, update_frame, update_title, update_startdate, update_enddate, update_content, add_item} = modalTodoItemSlice.actions
 
 
 //reducer 

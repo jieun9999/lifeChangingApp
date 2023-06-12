@@ -4,7 +4,8 @@ import check from "../../../img/icon/check.png";
 import styled from 'styled-components';
 import del from "../../../img/icon/delete.png";
 import { useDispatch } from "react-redux";
-import {delete_item } from "../../Health/TodoItem/modalTodoItemSlice";
+import {check_item, delete_item } from "../../Health/TodoItem/modalTodoItemSlice";
+
 
 const ContentContainer = styled.div`
 display:flex;
@@ -86,7 +87,6 @@ const TodoItem = ({todoModalContent}) =>{
 // 이외에 여러객체를 누적시킬 수 있는 공간이 필요하다
 const dispatch = useDispatch();
 
-
 return(
    <SeveralItemContainer>
       {
@@ -96,7 +96,7 @@ return(
       <TitleContainer>
       <img className ="dot" src={dot} alt="icon"></img>
       <div className="title">{item.title}</div>
-      <img className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
+      <img onClick={()=>dispatch(check_item())} className="noncheck" src = {item.isDone ? check: noncheck} alt="icon"></img>
       </TitleContainer>
       <ContentContainer>
       <div className="content">{item.content}</div>
